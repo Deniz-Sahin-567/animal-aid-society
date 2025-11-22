@@ -23,7 +23,6 @@ class Cat extends Model
         'gender',
         'birthdate',
         'arrival_date',
-        'location',
         'neutered',
         'description',
     ];

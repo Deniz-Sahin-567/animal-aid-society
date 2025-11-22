@@ -13,8 +13,9 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, CirclePlus, Rows3 } from 'lucide-react';
 import AppLogo from './app-logo';
+import cats from '@/routes/cats';
 
 const mainNavItems: NavItem[] = [
     {
@@ -22,17 +23,27 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Create Cat',
+        href: cats.create(),
+        icon: CirclePlus,
+    },
+    {
+        title: 'Cat List',
+        href: cats.index(),
+        icon: Rows3,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
+        href: 'https://github.com/Deniz-Sahin-567/animal-aid-society',
         icon: Folder,
     },
     {
         title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
+        href: 'https://laravel.com/docs/starter-kits#react', //TODO: update link
         icon: BookOpen,
     },
 ];
