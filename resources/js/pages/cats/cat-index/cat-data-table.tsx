@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     useState<VisibilityState>({})
 
-  const table = useReactTable({
+  const table = useReactTable({ //eslint-disable-line react-hooks/incompatible-library
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -203,7 +203,7 @@ export function DataTable<TData, TValue>({
                         (table.getColumn("birthdate")?.getFilterValue() as { from?: string; to?: string })?.from ?? ""
                       }
                       onChange={(e) => {
-                        const old = table.getColumn("birthdate")?.getFilterValue() as any;
+                        const old = table.getColumn("birthdate")?.getFilterValue() as object;
                         table.getColumn("birthdate")?.setFilterValue({ ...old, from: e.target.value });
                       }}
                     />
@@ -215,7 +215,7 @@ export function DataTable<TData, TValue>({
                         (table.getColumn("birthdate")?.getFilterValue() as { from?: string; to?: string })?.to ?? ""
                       }
                       onChange={(e) => {
-                        const old = table.getColumn("birthdate")?.getFilterValue() as any;
+                        const old = table.getColumn("birthdate")?.getFilterValue() as object;
                         table.getColumn("birthdate")?.setFilterValue({ ...old, to: e.target.value });
                       }}
                     />
@@ -231,7 +231,7 @@ export function DataTable<TData, TValue>({
                         (table.getColumn("arrival_date")?.getFilterValue() as { from?: string; to?: string })?.from ?? ""
                       }
                       onChange={(e) => {
-                        const old = table.getColumn("arrival_date")?.getFilterValue() as any;
+                        const old = table.getColumn("arrival_date")?.getFilterValue() as object;
                         table.getColumn("arrival_date")?.setFilterValue({ ...old, from: e.target.value });
                       }}
                     />
@@ -243,7 +243,7 @@ export function DataTable<TData, TValue>({
                         (table.getColumn("arrival_date")?.getFilterValue() as { from?: string; to?: string })?.to ?? ""
                       }
                       onChange={(e) => {
-                        const old = table.getColumn("arrival_date")?.getFilterValue() as any;
+                        const old = table.getColumn("arrival_date")?.getFilterValue() as object;
                         table.getColumn("arrival_date")?.setFilterValue({ ...old, to: e.target.value });
                       }}
                     />
