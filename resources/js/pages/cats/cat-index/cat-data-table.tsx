@@ -45,13 +45,14 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Filter } from "lucide-react"
+import { router } from "@inertiajs/react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { id: string | number }, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -295,6 +296,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => router.get(`/cats/${row.original.id}`)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

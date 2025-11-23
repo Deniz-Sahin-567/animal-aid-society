@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
+import { Cat } from "../cat-interface";
 
-export const columns: ColumnDef<object>[] = [
+export const columns: ColumnDef<Cat>[] = [
     {
         accessorKey: "name",
         header: () => <div className="text-center">Name</div>,

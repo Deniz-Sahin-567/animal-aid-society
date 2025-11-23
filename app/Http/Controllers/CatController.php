@@ -42,7 +42,9 @@ class CatController extends Controller
      */
     public function show(Cat $cat)
     {
-        return "Cat: {$cat->name}"; //TODO: Turn to Inertia render
+        return Inertia::render('cats/cat-show', [
+            'cat' => $cat,
+        ]);
     }
 
     /**
@@ -50,7 +52,9 @@ class CatController extends Controller
      */
     public function edit(Cat $cat)
     {
-        //
+        return Inertia::render('cats/cat-edit', [
+            'cat' => $cat,
+        ]);
     }
 
     /**
@@ -58,7 +62,9 @@ class CatController extends Controller
      */
     public function update(UpdateCatRequest $request, Cat $cat)
     {
-        //
+        $cat->update($request->validated());
+
+        return redirect()->route('cats.show', ['cat' => $cat]);
     }
 
     /**
@@ -66,6 +72,8 @@ class CatController extends Controller
      */
     public function destroy(Cat $cat)
     {
-        //
+        $cat->delete();
+
+        return redirect()->route('cats.index');
     }
 }

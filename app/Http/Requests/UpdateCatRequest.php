@@ -11,7 +11,8 @@ class UpdateCatRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        //TODO: Implement authorization logic if needed
+        return true;
     }
 
     /**
@@ -22,7 +23,14 @@ class UpdateCatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            //TODO: Check how enum works in validation rules
+            //TODO: Add date validations
+            'name' => 'required|string|max:30',
+            'gender' => 'required|string',
+            'birthdate' => 'required|date',
+            'arrival_date' => 'nullable|date',
+            'neutered' => 'required|string',
+            'description' => 'nullable|string',
         ];
     }
 }
