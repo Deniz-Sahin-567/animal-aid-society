@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 export const columns: ColumnDef<object>[] = [
     {
         accessorKey: "name",
-        header: () => <div className="text-center">Namme</div>,
+        header: () => <div className="text-center">Name</div>,
         cell: ({ row }) => {
             const value = String(row.getValue("name") ?? "");
             return <div className="text-center font-bold">{value}</div>;
@@ -14,6 +14,10 @@ export const columns: ColumnDef<object>[] = [
     {
         accessorKey: "gender",
         header: () => <div className="text-center">Gender</div>,
+        filterFn: (row, columnId, filterValue) => {
+            if (!filterValue) return true; // show all if filter is empty
+            return row.getValue(columnId) === filterValue; // exact match
+        },
         cell: ({ row }) => {
             const value = row.getValue("gender");
             let display;
@@ -47,9 +51,32 @@ export const columns: ColumnDef<object>[] = [
                 </div>
             )
         },
+        filterFn: (row, columnId, filterValue) => {
+            if (!filterValue) return true; // no filter applied
+
+            const rowDateValue = row.getValue(columnId);
+            if (!rowDateValue) return false;
+
+            // Ensure the value passed to Date is a string|number|Date to satisfy TypeScript overloads.
+            let rowDate: Date | null = null;
+            if (typeof rowDateValue === "string" || typeof rowDateValue === "number" || rowDateValue instanceof Date) {
+                rowDate = new Date(rowDateValue as string | number | Date);
+            } else {
+                // unsupported type, treat as no match
+                return false;
+            }
+
+            const fromDate = filterValue.from ? new Date(filterValue.from) : null;
+            const toDate = filterValue.to ? new Date(filterValue.to) : null;
+
+            if (fromDate && rowDate < fromDate) return false;
+            if (toDate && rowDate > toDate) return false;
+
+            return true;
+        },
         cell: ({ row }) => {
             const value = String(row.getValue("birthdate"));
-            return <div className="text-center">{value ? value : "Unknown"}</div>;
+            return <div className="text-center">{value != "null" ? value : "Unknown"}</div>;
         }
     },
     {
@@ -67,9 +94,32 @@ export const columns: ColumnDef<object>[] = [
                 </div>
             )
         },
+        filterFn: (row, columnId, filterValue) => {
+            if (!filterValue) return true; // no filter applied
+
+            const rowDateValue = row.getValue(columnId);
+            if (!rowDateValue) return false;
+
+            // Ensure the value passed to Date is a string|number|Date to satisfy TypeScript overloads.
+            let rowDate: Date | null = null;
+            if (typeof rowDateValue === "string" || typeof rowDateValue === "number" || rowDateValue instanceof Date) {
+                rowDate = new Date(rowDateValue as string | number | Date);
+            } else {
+                // unsupported type, treat as no match
+                return false;
+            }
+
+            const fromDate = filterValue.from ? new Date(filterValue.from) : null;
+            const toDate = filterValue.to ? new Date(filterValue.to) : null;
+
+            if (fromDate && rowDate < fromDate) return false;
+            if (toDate && rowDate > toDate) return false;
+
+            return true;
+        },
         cell: ({ row }) => {
             const value = String(row.getValue("arrival_date"));
-            return <div className="text-center">{value ? value : "Unknown"}</div>;
+            return <div className="text-center">{value != "null" ? value : "Unknown"}</div>;
         }
     },
     {
