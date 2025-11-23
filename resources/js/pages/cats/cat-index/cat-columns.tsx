@@ -1,25 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
-import { clearLine } from "readline";
 
-export type Cat = {
-    
-}
-
-export const columns: ColumnDef<any>[] = [
+export const columns: ColumnDef<object>[] = [
     {
         accessorKey: "name",
-        header: () => <div className="text-center">Name</div>,
-        cell: ({ row }: { row: any }) => {
-            const value = row.getValue("name");
+        header: () => <div className="text-center">Namme</div>,
+        cell: ({ row }) => {
+            const value = String(row.getValue("name") ?? "");
             return <div className="text-center font-bold">{value}</div>;
         }
     },
     {
         accessorKey: "gender",
         header: () => <div className="text-center">Gender</div>,
-        cell: ({ row }: { row: any }) => {
+        cell: ({ row }) => {
             const value = row.getValue("gender");
             let display;
 
@@ -39,7 +34,7 @@ export const columns: ColumnDef<any>[] = [
     },
     {
         accessorKey: "birthdate",
-        header: ({ column }: { column: any }) => {
+        header: ({ column }) => {
             return (
                 <div className="flex justify-center">
                     <Button
@@ -52,14 +47,14 @@ export const columns: ColumnDef<any>[] = [
                 </div>
             )
         },
-        cell: ({ row }: { row: any }) => {
-            const value = row.getValue("birthdate");
+        cell: ({ row }) => {
+            const value = String(row.getValue("birthdate"));
             return <div className="text-center">{value ? value : "Unknown"}</div>;
         }
     },
     {
         accessorKey: "arrival_date",
-        header: ({ column }: { column: any }) => {
+        header: ({ column }) => {
             return (
                 <div className="flex justify-center">
                     <Button
@@ -72,15 +67,15 @@ export const columns: ColumnDef<any>[] = [
                 </div>
             )
         },
-        cell: ({ row }: { row: any }) => {
-            const value = row.getValue("arrival_date");
+        cell: ({ row }) => {
+            const value = String(row.getValue("arrival_date"));
             return <div className="text-center">{value ? value : "Unknown"}</div>;
         }
     },
     {
         accessorKey: "neutered",
         header: () => <div className="text-center">Neutered</div>,
-        cell: ({ row }: { row: any }) => {
+        cell: ({ row }) => {
             const value = row.getValue("neutered");
             let display;
 

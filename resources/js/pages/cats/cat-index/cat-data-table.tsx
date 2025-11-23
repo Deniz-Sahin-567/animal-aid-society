@@ -37,7 +37,8 @@ export function DataTable<TData, TValue>({
     pageSize: 10,
   })
 
-  const table = useReactTable({
+    
+  const table = useReactTable({ //eslint-disable-line react-hooks/incompatible-library
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),

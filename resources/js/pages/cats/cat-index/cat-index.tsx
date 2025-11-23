@@ -12,7 +12,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 
-export default function CatIndexTable({ cats }: { cats: any[] }) {
+export default function CatIndexTable({ cats }: { cats: object[] }) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
