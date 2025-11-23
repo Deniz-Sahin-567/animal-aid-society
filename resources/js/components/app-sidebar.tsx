@@ -13,7 +13,7 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, CirclePlus, Rows3 } from 'lucide-react';
+import { FolderGit2, LayoutGrid, CirclePlus, Rows3, Mail } from 'lucide-react';
 import AppLogo from './app-logo';
 import cats from '@/routes/cats';
 
@@ -39,12 +39,12 @@ const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
         href: 'https://github.com/Deniz-Sahin-567/animal-aid-society',
-        icon: Folder,
+        icon: FolderGit2,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react', //TODO: update link
-        icon: BookOpen,
+        title: 'Send e-mail to developer',
+        href: 'mailto:bhdkweb@gmail.com', 
+        icon: Mail,
     },
 ];
 
