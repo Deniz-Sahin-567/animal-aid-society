@@ -77,15 +77,15 @@ export default function CatCreationForm() {
 
 
 
-                                {/* Birthdate */}
+                                {/* Birth_date */}
                                 <div className="grid gap-2">
-                                    <Label htmlFor="birthdate">Birth Date</Label>
+                                    <Label htmlFor="birth_date">Birth Date</Label>
                                     <Input
-                                        id="birthdate"
-                                        name="birthdate"
+                                        id="birth_date"
+                                        name="birth_date"
                                         type="date"
                                     />
-                                    <InputError message={errors.birthdate} />
+                                    <InputError message={errors.birth_date} />
                                 </div>
 
                                 {/* Arrival Date */}

@@ -128,19 +128,19 @@ export default function CatEditPage({ cat }: { cat: Cat }) {
 
                                     <CardContent className="space-y-6">
 
-                                        {/* Birthdate */}
+                                        {/* Birth_date */}
                                         <div className="grid gap-2">
-                                            <Label htmlFor="birthdate">Birth Date</Label>
+                                            <Label htmlFor="birth_date">Birth Date</Label>
                                             <div className="flex items-center gap-3">
                                                 <CalendarDays className="h-5 w-5 text-gray-600" />
                                                 <Input
-                                                    id="birthdate"
-                                                    name="birthdate"
+                                                    id="birth_date"
+                                                    name="birth_date"
                                                     type="date"
-                                                    defaultValue={cat.birthdate ? cat.birthdate : ''}
+                                                    defaultValue={cat.birth_date ? cat.birth_date : ''}
                                                 />
                                             </div>
-                                            <InputError message={errors.birthdate} />
+                                            <InputError message={errors.birth_date} />
                                         </div>
 
                                         {/* Arrival Date */}

@@ -27,7 +27,7 @@ class UpdateCatRequest extends FormRequest
             //TODO: Add date validations
             'name' => 'required|string|max:30',
             'gender' => 'required|string',
-            'birthdate' => 'required|date',
+            'birth_date' => 'required|date',
             'arrival_date' => 'nullable|date',
             'neutered' => 'required|string',
             'description' => 'nullable|string',

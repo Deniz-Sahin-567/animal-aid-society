@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
 {
-    //
+    protected $fillable = ['name', 'area_id'];
+
+    public function parent()
+    {
+        return $this->belongsTo(Area::class, 'area_id'); 
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Area::class, 'area_id');
+    }
 }

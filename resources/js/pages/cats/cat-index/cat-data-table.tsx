@@ -63,7 +63,10 @@ export function DataTable<TData extends { id: string | number }, TValue>({
   })
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] =
-    useState<VisibilityState>({})
+    useState<VisibilityState>({
+      id: false, // Hide ID column by default
+      description: false, // Hide Description column by default
+    })
 
   const table = useReactTable({ //eslint-disable-line react-hooks/incompatible-library
     data,
@@ -201,11 +204,11 @@ export function DataTable<TData extends { id: string | number }, TValue>({
                     <Input
                       type="date"
                       value={
-                        (table.getColumn("birthdate")?.getFilterValue() as { from?: string; to?: string })?.from ?? ""
+                        (table.getColumn("birth_date")?.getFilterValue() as { from?: string; to?: string })?.from ?? ""
                       }
                       onChange={(e) => {
-                        const old = table.getColumn("birthdate")?.getFilterValue() as object;
-                        table.getColumn("birthdate")?.setFilterValue({ ...old, from: e.target.value });
+                        const old = table.getColumn("birth_date")?.getFilterValue() as object;
+                        table.getColumn("birth_date")?.setFilterValue({ ...old, from: e.target.value });
                       }}
                     />
 
@@ -213,11 +216,11 @@ export function DataTable<TData extends { id: string | number }, TValue>({
                     <Input
                       type="date"
                       value={
-                        (table.getColumn("birthdate")?.getFilterValue() as { from?: string; to?: string })?.to ?? ""
+                        (table.getColumn("birth_date")?.getFilterValue() as { from?: string; to?: string })?.to ?? ""
                       }
                       onChange={(e) => {
-                        const old = table.getColumn("birthdate")?.getFilterValue() as object;
-                        table.getColumn("birthdate")?.setFilterValue({ ...old, to: e.target.value });
+                        const old = table.getColumn("birth_date")?.getFilterValue() as object;
+                        table.getColumn("birth_date")?.setFilterValue({ ...old, to: e.target.value });
                       }}
                     />
                   </div>

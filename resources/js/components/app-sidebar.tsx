@@ -13,9 +13,10 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { FolderGit2, LayoutGrid, CirclePlus, Rows3, Mail } from 'lucide-react';
+import { FolderGit2, LayoutGrid, Cat, MapPlus, Map, List, Mail } from 'lucide-react';
 import AppLogo from './app-logo';
 import cats from '@/routes/cats';
+import areas from '@/routes/areas';
 
 const mainNavItems: NavItem[] = [
     {
@@ -26,12 +27,22 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Create Cat',
         href: cats.create(),
-        icon: CirclePlus,
+        icon: Cat,
     },
     {
         title: 'Cat List',
         href: cats.index(),
-        icon: Rows3,
+        icon: List,
+    },
+    {
+        title: 'Create Area',
+        href: areas.create(),
+        icon: MapPlus,
+    },
+    {
+        title: 'Area List',
+        href: areas.index(),
+        icon: Map,
     },
 ];
 

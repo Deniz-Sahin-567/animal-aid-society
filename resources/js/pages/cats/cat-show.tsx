@@ -109,13 +109,13 @@ export default function CatShowPage({ cat }: { cat: Cat }) {
                         </CardHeader>
                         <CardContent className="space-y-4">
 
-                            {/* Birthdate */}
+                            {/* Birth_date */}
                             <div className="flex items-center gap-3">
                                 <CalendarDays className="h-5 w-5 text-gray-600" />
                                 <div>
                                     <p className="text-sm text-gray-500">Birth Date</p>
                                     <p className="text-lg font-medium">
-                                        {cat.birthdate ?? '—'}
+                                        {cat.birth_date ?? '—'}
                                     </p>
                                 </div>
                             </div>

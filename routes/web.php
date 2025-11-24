@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CatController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource('cats', CatController::class);
+    Route::resource('areas', AreaController::class);
 });
 
 require __DIR__ . '/settings.php';

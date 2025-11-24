@@ -5,6 +5,14 @@ import { Cat } from "../cat-interface";
 
 export const columns: ColumnDef<Cat>[] = [
     {
+        accessorKey: "id",
+        header: () => <div className="text-center font-semibold">ID</div>,
+        cell: ({ row }) => {
+            const value = String(row.getValue("id") ?? "");
+            return <div className="text-center">{value}</div>;
+        }
+    },
+    {
         accessorKey: "name",
         header: () => <div className="text-center">Name</div>,
         cell: ({ row }) => {
@@ -38,7 +46,7 @@ export const columns: ColumnDef<Cat>[] = [
         },
     },
     {
-        accessorKey: "birthdate",
+        accessorKey: "birth_date",
         header: ({ column }) => {
             return (
                 <div className="flex justify-center">
@@ -76,7 +84,7 @@ export const columns: ColumnDef<Cat>[] = [
             return true;
         },
         cell: ({ row }) => {
-            const value = String(row.getValue("birthdate"));
+            const value = String(row.getValue("birth_date"));
             return <div className="text-center">{value != "null" ? value : "Unknown"}</div>;
         }
     },

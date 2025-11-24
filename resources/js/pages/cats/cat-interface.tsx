@@ -2,7 +2,7 @@ export interface Cat {
   id: number;
   name: string;
   gender: 'male' | 'female' | 'unknown';
-  birthdate: string | null;        // ISO date string from API
+  birth_date: string | null;        // ISO date string from API
   arrival_date: string | null;     // ISO date string
   neutered: 'yes' | 'no' | 'unknown';
   description: string | null;
