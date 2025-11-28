@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cat;
 use App\Http\Requests\StoreCatRequest;
 use App\Http\Requests\UpdateCatRequest;
-use App\Models\AnimalLocation;
 use Inertia\Inertia;
 
 class CatController extends Controller

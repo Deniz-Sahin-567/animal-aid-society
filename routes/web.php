@@ -24,6 +24,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('cats/{cat}')->group(function () {
         Route::resource('/animal-locations', AnimalLocationController::class);
     });
+
+    Route::get('cat-list/{area}', [AnimalLocationController::class, 'area_cats'])->name('area-cat-list');
 });
 
 require __DIR__ . '/settings.php';

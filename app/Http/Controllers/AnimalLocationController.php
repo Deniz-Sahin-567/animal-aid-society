@@ -47,4 +47,16 @@ class AnimalLocationController extends Controller
 
         return redirect()->route('cats.edit', ['cat' => $cat]);
     }
+
+    public function area_cats(Area $area)
+    {
+        $locations = $area->descendants()->pluck('id')->toArray(); 
+
+        $cats = Cat::join('animal_locations', 'animal_locations.animal_id', '=', 'cats.id')
+            ->whereIn('animal_locations.location', $locations)->select('cats.*')->distinct()->get();
+
+        return Inertia::render('cats/cat-index/cat-index', [
+            'cats' => $cats,
+        ]);
+    }
 }

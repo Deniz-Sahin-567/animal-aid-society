@@ -8,6 +8,7 @@ import { Info, Map, Scan, LandPlot, Grid2X2, List } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import areas from '@/routes/areas';
 import { Pencil } from 'lucide-react';
+import { areaCatList } from '@/routes';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -37,11 +38,14 @@ export default function AreaShow({ area, subAreas = [] }: AreaShowProps) {
                             Edit
                         </Link>
                     </Button>
-                    <Button asChild className="flex items-center gap-2">
-                        <Link href={areas.index().url}>
+                    <Button asChild className="flex items-center gap-2"
+                        onClick={() => router.get(areaCatList(area.id).url)}
+                    >
+                        <div>
                             <List className="h-4 w-4" />
-                            Area List
-                        </Link>
+                            <p>Cats in the Area</p>
+                        </div>
+
                     </Button>
                 </div>
 
@@ -65,7 +69,7 @@ export default function AreaShow({ area, subAreas = [] }: AreaShowProps) {
                                     <p className="text-lg font-medium leading-tight">{area.name}</p>
                                 </div>
                             </div>
-                            
+
                             {area.parent && (
                                 <Button
                                     variant="ghost"

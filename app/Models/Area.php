@@ -10,7 +10,7 @@ class Area extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Area::class, 'area_id'); 
+        return $this->belongsTo(Area::class, 'area_id');
     }
 
     public function children()
@@ -21,5 +21,22 @@ class Area extends Model
     public function cats()
     {
         return $this->belongsToMany(Cat::class, 'animal_locations', 'location', 'animal_id');
+    }
+
+    /**
+     * Recursively get all descendants.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function descendants()
+    {
+        $descendants = collect();
+
+        foreach ($this->children as $child) {
+            $descendants->push($child);
+            $descendants = $descendants->merge($child->descendants());
+        }
+
+        return $descendants;
     }
 }
