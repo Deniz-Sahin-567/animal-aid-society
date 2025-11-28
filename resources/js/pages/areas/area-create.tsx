@@ -33,6 +33,12 @@ export default function AreaCreationForm({ allAreas }: { allAreas: Area[] }) {
         setSelectedAreas(newSelected);
     };
 
+    const handleClear = (level: number) => {
+        const newSelected = [...selectedAreas];
+        newSelected.splice(level);
+        setSelectedAreas(newSelected);
+    };
+
     const getOptionsForLevel = (level: number) => {
         if (level === 0) {
             return allAreas.filter(area => !area.parent?.id); // top-level areas
@@ -105,6 +111,17 @@ export default function AreaCreationForm({ allAreas }: { allAreas: Area[] }) {
                                                             </SelectContent>
                                                         </Select>
                                                     </div>
+
+                                                    {selectedAreas[level] && (
+                                                        <Button
+                                                            type="button"
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            onClick={() => handleClear(level)}
+                                                        >
+                                                            Clear
+                                                        </Button>
+                                                    )}
                                                 </div>
                                             );
                                         })}

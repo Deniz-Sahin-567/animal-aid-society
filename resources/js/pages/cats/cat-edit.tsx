@@ -1,4 +1,4 @@
-import { Head, Form, useForm } from '@inertiajs/react';
+import { Head, Form, useForm, router } from '@inertiajs/react';
 import AuthLayout from '@/layouts/auth-layout';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
@@ -22,14 +22,17 @@ import {
     Cat as CatIcon,
     Info,
     CalendarDays,
-    VenusAndMars,
     Trash2,
+    Map,
+    SquareScissors,
 } from 'lucide-react';
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Spinner } from '@/components/ui/spinner';
 import { Cat } from './cat-interface';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Area } from '../areas/area-interface';
+import animal_locations from '@/routes/animal-locations';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -38,10 +41,10 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function CatEditPage({ cat }: { cat: Cat }) {
+export default function CatEditPage({ cat, locations }: { cat: Cat, locations: Area[] }) {
 
     const { delete: destroy, } = useForm();
-    
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <AuthLayout
@@ -165,7 +168,7 @@ export default function CatEditPage({ cat }: { cat: Cat }) {
                                 <Card className="shadow-md rounded-2xl">
                                     <CardHeader>
                                         <CardTitle className="flex items-center gap-2">
-                                            <VenusAndMars className="h-6 w-6" />
+                                            <SquareScissors className="h-6 w-6" />
                                             Neutered Status
                                         </CardTitle>
                                     </CardHeader>
@@ -218,15 +221,56 @@ export default function CatEditPage({ cat }: { cat: Cat }) {
                                         <InputError message={errors.description} />
                                     </CardContent>
                                 </Card>
+
+                                {/* Locations */}
+                                <Card className="shadow-md rounded-2xl lg:col-span-2">
+                                    <CardHeader>
+                                        <CardTitle className="flex items-center gap-2">
+                                            <Map className="h-6 w-6" />
+                                            Locations
+                                        </CardTitle>
+                                    </CardHeader>
+
+                                    <CardContent>
+                                        {locations && locations.length > 0 && (
+                                            <div>
+                                                <p className="text-sm text-gray-500 mb-2">Locations:</p>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {locations.map(area => (
+                                                        <span
+                                                            key={area.id}
+                                                            className="flex items-center gap-1 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                                                        >
+                                                            {area.name}
+
+                                                            {/* clickable X button */}
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    // Remove location from cat
+                                                                    router.delete(animal_locations.destroy([cat.id, area.id]).url);
+                                                                }}
+                                                                className="text-blue-600 hover:text-blue-900 hover:bg-blue-200 rounded-full w-4 h-4 flex items-center justify-center"
+                                                            >
+                                                                &times;
+                                                            </button>
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </CardContent>
+                                </Card>
+
                             </div>
-                            
+
                             {/* ---------- SUBMIT BUTTON ---------- */}
                             <Button type="submit" className="w-full mt-4">
                                 {processing && <Spinner />}
                                 Update Cat
                             </Button>
-                            
-                            
+
+
                             {/* --- Delete Button + Confirmation Dialog --- */}
                             <Dialog>
                                 <DialogTrigger asChild>

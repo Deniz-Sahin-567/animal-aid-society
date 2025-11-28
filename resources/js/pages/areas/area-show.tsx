@@ -4,7 +4,7 @@ import { BreadcrumbItem } from '@/types';
 import { Area } from './area-interface';
 import AppLayout from '@/layouts/app-layout';
 import AuthLayout from '@/layouts/auth-layout';
-import { SquareXIcon, ChevronRightIcon, Info, Map, Scan, LandPlot, Grid2X2, List } from 'lucide-react';
+import { Info, Map, Scan, LandPlot, Grid2X2, List } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import areas from '@/routes/areas';
 import { Pencil } from 'lucide-react';

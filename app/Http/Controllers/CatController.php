@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cat;
 use App\Http\Requests\StoreCatRequest;
 use App\Http\Requests\UpdateCatRequest;
+use App\Models\AnimalLocation;
 use Inertia\Inertia;
 
 class CatController extends Controller
@@ -16,7 +17,7 @@ class CatController extends Controller
     {
         return Inertia::render('cats/cat-index/cat-index', [
             'cats' => Cat::all(),
-        ]); 
+        ]);
     }
 
     /**
@@ -44,6 +45,7 @@ class CatController extends Controller
     {
         return Inertia::render('cats/cat-show', [
             'cat' => $cat,
+            'locations' => $cat->locations()
         ]);
     }
 
@@ -54,6 +56,7 @@ class CatController extends Controller
     {
         return Inertia::render('cats/cat-edit', [
             'cat' => $cat,
+            'locations' => $cat->locations(),
         ]);
     }
 

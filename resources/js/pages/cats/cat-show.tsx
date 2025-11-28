@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import AuthLayout from '@/layouts/auth-layout';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
@@ -23,10 +23,14 @@ import {
     X,
     HelpCircle,
     Pencil,
+    Map,
+    MapPlus,
 } from 'lucide-react';
 
 import { Button } from "@/components/ui/button";
 import { Cat } from './cat-interface';
+import { Area } from '../areas/area-interface';
+import animalLocations from '@/routes/animal-locations';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -35,8 +39,8 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function CatShowPage({ cat }: { cat: Cat }) {
-    
+export default function CatShowPage({ cat, locations }: { cat: Cat, locations: Area[] }) {
+
     const neuteredIcon =
         cat.neutered === 'yes'
             ? <Check className="h-5 w-5 text-green-600" />
@@ -166,6 +170,42 @@ export default function CatShowPage({ cat }: { cat: Cat }) {
                             <p className="text-gray-600 whitespace-pre-line leading-relaxed">
                                 {cat.description || 'No description provided.'}
                             </p>
+                        </CardContent>
+                    </Card>
+
+                    {/* Locations */}
+                    <Card className="shadow-md rounded-2xl lg:col-span-2">
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2">
+                                <Map className="h-6 w-6" />
+                                Locations
+
+                            </CardTitle>
+                            <div className="flex justify-end">
+
+                                <Button className="flex gap-2"
+                                    onClick={() => router.get(animalLocations.create(cat.id).url)}>
+                                    <MapPlus className="h-4 w-4" />
+                                    Add Locations
+                                </Button>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            {locations && locations.length > 0 && (
+                                <div>
+                                    <p className="text-sm text-gray-500 mb-2">Locations:</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {locations.map(area => (
+                                            <span
+                                                key={area.id}
+                                                className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                                            >
+                                                {area.name}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </CardContent>
                     </Card>
                 </div>

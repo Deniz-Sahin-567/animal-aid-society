@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalLocationController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CatController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('cats', CatController::class);
     Route::resource('areas', AreaController::class);
+
+    Route::prefix('cats/{cat}')->group(function () {
+        Route::resource('/animal-locations', AnimalLocationController::class);
+    });
 });
 
 require __DIR__ . '/settings.php';

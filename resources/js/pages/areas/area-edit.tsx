@@ -109,8 +109,9 @@ export default function AreaEditForm({ area, allAreas }: AreaEditFormProps) {
                                                 <div className="flex-1">
                                                     <Label htmlFor={`area-${level}`}>Sub-Area of</Label>
                                                     <Select
+                                                        value={selectedAreas[level] || ""}
                                                         onValueChange={(value) => handleChange(level, value)}
-                                                        value={selectedAreas[level] || "Default"}
+                                                        
                                                     >
                                                         <SelectTrigger id={`area-${level}`}>
                                                             <SelectValue placeholder="Select a sub-area" />

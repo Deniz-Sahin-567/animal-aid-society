@@ -17,4 +17,9 @@ class Area extends Model
     {
         return $this->hasMany(Area::class, 'area_id');
     }
+
+    public function cats()
+    {
+        return $this->belongsToMany(Cat::class, 'animal_locations', 'location', 'animal_id');
+    }
 }
