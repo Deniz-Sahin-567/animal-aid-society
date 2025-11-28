@@ -58,21 +58,28 @@ export default function AreaShow({ area, subAreas = [] }: AreaShowProps) {
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center px-3 gap-3">
                                 <Map className="h-5 w-5 text-gray-600" />
                                 <div>
-                                    <p className="text-sm text-gray-500">Name</p>
-                                    <p className="text-lg font-medium">{area.name}</p>
+                                    <p className="text-sm text-gray-500 leading-tight">Name</p>
+                                    <p className="text-lg font-medium leading-tight">{area.name}</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-3"
-                                onClick={() => { if (area.parent) router.get(`/areas/${area.parent?.id}`) }}>
-                                <Scan className="h-5 w-5 text-gray-600" />
-                                <div>
-                                    <p className="text-sm text-gray-500">Sub-Area of</p>
-                                    <p className="text-lg font-medium">{area.parent?.name ?? "-"}</p>
-                                </div>
-                            </div>
+                            
+                            {area.parent && (
+                                <Button
+                                    variant="ghost"
+                                    className="w-full justify-start h-auto py-3 px-3 gap-4"
+                                    onClick={() => router.get(`/areas/${area.parent?.id}`)}
+                                >
+                                    <Scan className="h-5 w-5 text-gray-600" />
+                                    <div className="text-left">
+                                        <p className="text-sm text-gray-500 leading-tight">Sub-Area of</p>
+                                        <p className="text-lg font-medium leading-tight">{area.parent?.name ?? "-"}</p>
+                                    </div>
+                                </Button>
+                            )}
+
                         </CardContent>
                     </Card>
 
@@ -87,13 +94,13 @@ export default function AreaShow({ area, subAreas = [] }: AreaShowProps) {
                             </CardHeader>
                             <CardContent className="grid gap-2">
                                 {subAreas.map((subArea) => (
-                                    <Card key={subArea.id} className="shadow rounded-xl"
+                                    <Button key={subArea.id} className="shadow rounded-xl justify-start" variant={"ghost"}
                                         onClick={() => router.get(`/areas/${subArea.id}`)}>
                                         <CardContent className="flex items-center gap-2">
                                             <Grid2X2 className="w-4 h-4 text-gray-400" />
-                                            <p className="text-gray-500 font-medium">{subArea.name}</p>
+                                            <p className="text-gray-300 font-medium">{subArea.name}</p>
                                         </CardContent>
-                                    </Card>
+                                    </Button>
                                 ))}
                             </CardContent>
                         </Card>

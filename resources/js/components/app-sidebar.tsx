@@ -40,7 +40,7 @@ const mainNavItems: NavItem[] = [
         icon: MapPlus,
     },
     {
-        title: 'Area List',
+        title: 'Areas',
         href: areas.index(),
         icon: Map,
     },

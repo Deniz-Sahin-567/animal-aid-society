@@ -58,7 +58,7 @@ export default function AreaEditForm({ area, allAreas }: AreaEditFormProps) {
     };
 
     const getOptionsForLevel = (level: number) => {
-        if (level === 0) return allAreas.filter(a => !a.parent?.id);
+        if (level === 0) return allAreas.filter(a => !a.parent?.id && a.id != area.id);
         const parentId = selectedAreas[level - 1];
         return parentId ? getChildren(Number(parentId)).filter(a => a.id != area.id) : [];
     };

@@ -14,7 +14,14 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::with('parent')->get();
+        $areas = Area::with('parent')->where('area_id', null)->get();
+
+        switch ($areas->count()) {
+            case 0:
+                return redirect()->route('areas.create');
+            case 1:
+                return redirect()->route('areas.show', ['area' => $areas->first()->id]);
+        }
 
         return Inertia::render(
             'areas/area-index/area-index',
@@ -42,7 +49,7 @@ class AreaController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:50',
-            'area_id' => 'exists:areas,id|integer',
+            'area_id' => 'nullable|exists:areas,id|integer',
         ]);
 
         $area = Area::create($validated);
@@ -86,7 +93,7 @@ class AreaController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:50',
-            'area_id' => 'exists:areas,id|integer',
+            'area_id' => 'nullable|exists:areas,id|integer',
         ]);
 
         Area::findOrFail($id)->update($validated);
