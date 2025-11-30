@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnimalLocationController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\InvitationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -20,6 +21,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('cats', CatController::class);
     Route::resource('areas', AreaController::class);
+    Route::resource('invitations', InvitationController::class)->only([
+        'index', 'create', 'store'
+    ]);
 
     Route::prefix('cats/{cat}')->group(function () {
         Route::resource('/animal-locations', AnimalLocationController::class);

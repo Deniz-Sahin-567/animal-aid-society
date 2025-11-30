@@ -13,10 +13,11 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { FolderGit2, LayoutGrid, Cat, MapPlus, Map, List, Mail } from 'lucide-react';
+import { FolderGit2, LayoutGrid, Cat, MapPlus, Map, List, Mail, UserRoundPlus } from 'lucide-react';
 import AppLogo from './app-logo';
 import cats from '@/routes/cats';
 import areas from '@/routes/areas';
+import invitations from '@/routes/invitations';
 
 const mainNavItems: NavItem[] = [
     {
@@ -44,6 +45,12 @@ const mainNavItems: NavItem[] = [
         href: areas.index(),
         icon: Map,
     },
+    {
+        title: 'Invite Member',
+        href: invitations.create(),
+        icon: UserRoundPlus,
+    },
+    
 ];
 
 const footerNavItems: NavItem[] = [

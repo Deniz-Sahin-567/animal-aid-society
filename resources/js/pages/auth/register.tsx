@@ -10,7 +10,25 @@ import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
 
-export default function Register() {
+interface Invite {
+    email: string;
+    token: string;
+    used: boolean;
+}
+
+export default function Register({ invite }: { invite: Invite }) {
+    if (invite.used) {
+        return <AuthLayout
+            title="This link has already been used."
+            description="Please contact an administrator if you think there has been a mistake."
+        ><Head title="Register" /><div className="text-center text-sm text-muted-foreground">
+                Already have an account?{' '}
+                <TextLink href={login()} tabIndex={6}>
+                    Log in
+                </TextLink>
+            </div></AuthLayout>
+    }
+
     return (
         <AuthLayout
             title="Create an account"
@@ -44,12 +62,17 @@ export default function Register() {
                                 />
                             </div>
 
+                            <input type="hidden" name="token" value={invite.token} />
+
+
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email address</Label>
                                 <Input
                                     id="email"
                                     type="email"
                                     required
+                                    readOnly
+                                    value={invite.email}
                                     tabIndex={2}
                                     autoComplete="email"
                                     name="email"
