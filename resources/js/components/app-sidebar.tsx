@@ -11,8 +11,8 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
+import { SharedData, type NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 import { FolderGit2, LayoutGrid, Cat, MapPlus, Map, List, Mail, UserRoundPlus } from 'lucide-react';
 import AppLogo from './app-logo';
 import cats from '@/routes/cats';
@@ -45,13 +45,18 @@ const mainNavItems: NavItem[] = [
         href: areas.index(),
         icon: Map,
     },
+
+];
+
+const adminNavItems: NavItem[] = [
     {
         title: 'Invite Member',
         href: invitations.create(),
         icon: UserRoundPlus,
     },
-    
+
 ];
+
 
 const footerNavItems: NavItem[] = [
     {
@@ -61,12 +66,14 @@ const footerNavItems: NavItem[] = [
     },
     {
         title: 'Send e-mail to developer',
-        href: 'mailto:bhdkweb@gmail.com', 
+        href: 'mailto:bhdkweb@gmail.com',
         icon: Mail,
     },
 ];
 
 export function AppSidebar() {
+    const { auth } = usePage<SharedData>().props;
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -82,7 +89,11 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={mainNavItems} name="BHDK" />
+                {auth.user.role === 'admin' &&
+                    <NavMain items={adminNavItems} name="Admin" />
+                }
+
             </SidebarContent>
 
             <SidebarFooter>

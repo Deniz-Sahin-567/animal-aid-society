@@ -120,20 +120,20 @@ export default function Welcome() {
                         </div>
                         <div className="relative -mb-px aspect-[335/376] w-full shrink-0 overflow-hidden rounded-t-lg bg-[#fff2f2] lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg dark:bg-[#1D0002]">
                             <h1
-                                className="translate-x-[25px] translate-y-[-10px]
+                                className="text-center absolute left-1/2 -translate-x-1/2 -translate-y-1/4
                                         w-full max-w-none
                                         text-[#F53003] opacity-100
-                                        transition-all duration-750 dark:text-[#F61500]
+                                        transition-all duration-2000 dark:text-[#F61500]
                                         starting:translate-y-10 starting:opacity-0
                                         starting:translate-x-7
-                                        font-black text-[90px] tracking-widest"
+                                        font-black text-[100px] tracking-widest"
                             >
                                 BHDK
                             </h1>
 
 
 
-                            <img src="/main-page-cat.png" alt="Cat Image" className="absolute bottom-0 left-4/7 max-h-full w-auto -translate-x-1/2 lg:left-auto lg:right-0 lg:translate-x-0" />
+                            <img src="/main-page-cat.png" alt="Cat Image" className="absolute bottom-[-20px] left-1/2 max-h-full w-auto -translate-x-1/2 " />
                             <div className="absolute inset-0 rounded-t-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-t-none lg:rounded-r-lg dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]" />
                         </div>
                     </main>

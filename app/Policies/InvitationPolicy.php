@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Invitation;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class InvitationPolicy
 {
@@ -29,7 +28,7 @@ class InvitationPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role == 'admin';
     }
 
     /**

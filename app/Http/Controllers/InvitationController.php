@@ -6,6 +6,7 @@ use App\Models\Invitation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InvitationMail;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class InvitationController extends Controller
@@ -23,6 +24,8 @@ class InvitationController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Invitation::class);
+
         return Inertia::render('invitations/invitation-create');
     }
 
@@ -31,6 +34,8 @@ class InvitationController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Invitation::class);
+
         $validated = $request->validate([
             'email' => 'required|email|max:50|unique:invitations,email|unique:users,email',
         ]);
