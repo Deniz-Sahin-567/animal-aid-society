@@ -1,12 +1,12 @@
 <?php
 
-test('registration screen can be rendered', function () {
+test('registration screen cannot be rendered', function () {
     $response = $this->get(route('register'));
 
-    $response->assertStatus(200);
+    $response->assertStatus(404);
 });
 
-test('new users can register', function () {
+test('new users cannot register', function () {
     $response = $this->post(route('register.store'), [
         'name' => 'Test User',
         'email' => 'test@example.com',
@@ -14,6 +14,6 @@ test('new users can register', function () {
         'password_confirmation' => 'password',
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $this->assertGuest();
+    // $response->assertRedirect(route('dashboard', absolute: false));
 });
