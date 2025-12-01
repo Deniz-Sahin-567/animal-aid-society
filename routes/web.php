@@ -3,6 +3,8 @@
 use App\Http\Controllers\AnimalLocationController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\CatPhotoController;
+use App\Http\Controllers\CatSubitemController;
 use App\Http\Controllers\InvitationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,11 +24,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('cats', CatController::class);
     Route::resource('areas', AreaController::class);
     Route::resource('invitations', InvitationController::class)->only([
-        'index', 'create', 'store'
+        'index',
+        'create',
+        'store'
     ]);
 
     Route::prefix('cats/{cat}')->group(function () {
         Route::resource('/animal-locations', AnimalLocationController::class);
+
+        Route::resource('/photos', CatPhotoController::class)->only([
+            'store', 'destroy'
+        ]);
     });
 
     Route::get('cat-list/{area}', [AnimalLocationController::class, 'area_cats'])->name('area-cat-list');

@@ -1,5 +1,4 @@
-import { Head, Link, router } from '@inertiajs/react';
-import AuthLayout from '@/layouts/auth-layout';
+import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
 import cats from '@/routes/cats';
@@ -24,19 +23,14 @@ import {
     HelpCircle,
     Pencil,
     Map,
-    MapPlus,
 } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import { Cat } from './cat-interface';
 import { Area } from '../areas/area-interface';
-import animalLocations from '@/routes/animal-locations';
 
 const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'View Cat',
-        href: '#',
-    },
+    { title: 'View Cat', href: '#' },
 ];
 
 export default function CatShowPage({ cat, locations }: { cat: Cat, locations: Area[] }) {
@@ -50,166 +44,164 @@ export default function CatShowPage({ cat, locations }: { cat: Cat, locations: A
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <AuthLayout
-                title={`Cat: ${cat.name}`}
-                description="Details about this cat"
-            >
+            <Head title={`Cat: ${cat.name}`} />
 
-                <div className="flex justify-end gap-3 mb-4">
+            <div>
+                    <div className="flex justify-between items-center mb-2 mt-3 max-w-5xl mx-auto px-4">
+                    <div className="text-3xl font-semibold ml-4">
+                        {cat.name}
+                    </div>
 
-                    {/* --- Edit Button --- */}
-                    <Button asChild className="flex items-center gap-2">
+                    <Button asChild className="flex items-center gap-2 rounded-2xl px-4 py-2 text-base mr-3">
                         <Link href={cats.edit(cat.id).url}>
-                            <Pencil className="h-4 w-4" />
-                            Edit
+                            <Pencil className="h-4 w-4" /> Edit
                         </Link>
                     </Button>
                 </div>
 
 
-                <Head title={`Cat: ${cat.name}`} />
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto px-4 mb-4">
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className='lg:col-span-1 gap-3 grid grid-cols-1 flex'>
 
-                    {/* ——— Basic Info ——— */}
-                    <Card className="shadow-md rounded-2xl">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <CatIcon className="h-6 w-6" />
-                                Basic Information
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
+                        {/* Photos */}
+                        <Card className="rounded-3xl shadow-sm border border-outline/20 ">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                                    <CatIcon className="h-6 w-6" /> Photo
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                {cat.photos.length === 0 ? (
+                                    <p className="text-sm text-secondary">No photos uploaded.</p>
+                                ) : (
+                                    <img
+                                        src={cat.photos[0].path}
+                                        alt="Cat"
+                                        className="rounded-2xl w-full object-cover h-72 shadow-sm"
+                                    />
+                                )}
+                            </CardContent>
+                        </Card>
 
-                            {/* Name */}
-                            <div className="flex items-center gap-3">
-                                <User className="h-5 w-5 text-gray-600" />
-                                <div>
-                                    <p className="text-sm text-gray-500">Name</p>
-                                    <p className="text-lg font-medium">{cat.name}</p>
-                                </div>
-                            </div>
-
-                            {/* Gender */}
-                            <div className="flex items-center gap-3">
-                                <VenusAndMars className="h-5 w-5 text-gray-600" />
-                                <div>
-                                    <p className="text-sm text-gray-500">Gender</p>
-                                    <p className="text-lg font-medium capitalize">
-                                        {cat.gender}
-                                    </p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* ——— Dates ——— */}
-                    <Card className="shadow-md rounded-2xl">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Calendar className="h-6 w-6" />
-                                Important Dates
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-
-                            {/* Birth_date */}
-                            <div className="flex items-center gap-3">
-                                <CalendarDays className="h-5 w-5 text-gray-600" />
-                                <div>
-                                    <p className="text-sm text-gray-500">Birth Date</p>
-                                    <p className="text-lg font-medium">
-                                        {cat.birth_date ?? '—'}
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* Arrival Date */}
-                            <div className="flex items-center gap-3">
-                                <CalendarDays className="h-5 w-5 text-gray-600" />
-                                <div>
-                                    <p className="text-sm text-gray-500">Arrival Date</p>
-                                    <p className="text-lg font-medium">
-                                        {cat.arrival_date ?? '—'}
-                                    </p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* ——— Neutered Status ——— */}
-                    <Card className="shadow-md rounded-2xl">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <SquareScissors className="h-6 w-6" />
-                                Neutered Status
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="flex items-center gap-3">
-                                {neuteredIcon}
-                                <div>
-                                    <p className="text-sm text-gray-500">Neutered</p>
-                                    <p className="text-lg font-medium capitalize">
-                                        {cat.neutered}
-                                    </p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* ——— Description ——— */}
-                    <Card className="shadow-md rounded-2xl lg:col-span-2">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Info className="h-6 w-6" />
-                                Description
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-gray-600 whitespace-pre-line leading-relaxed">
-                                {cat.description || 'No description provided.'}
-                            </p>
-                        </CardContent>
-                    </Card>
-
-                    {/* Locations */}
-                    <Card className="shadow-md rounded-2xl lg:col-span-2">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Map className="h-6 w-6" />
-                                Locations
-
-                            </CardTitle>
-                            <div className="flex justify-end">
-
-                                <Button className="flex gap-2"
-                                    onClick={() => router.get(animalLocations.create(cat.id).url)}>
-                                    <MapPlus className="h-4 w-4" />
-                                    Add Locations
-                                </Button>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            {locations && locations.length > 0 && (
-                                <div>
-                                    <p className="text-sm text-gray-500 mb-2">Locations:</p>
-                                    <div className="flex flex-wrap gap-2">
+                        {/* Locations */}
+                        <Card className="rounded-3xl shadow-sm border border-outline/20">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                                    <Map /> Locations
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                {locations?.length > 0 ? (
+                                    <div className="flex flex-wrap gap-3">
                                         {locations.map(area => (
                                             <span
                                                 key={area.id}
-                                                className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                                                className="flex items-center gap-2 bg-primary/15 text-primary px-3 py-1 rounded-full text-sm"
                                             >
                                                 {area.name}
                                             </span>
                                         ))}
                                     </div>
+                                ) : (
+                                    <p className="text-sm text-secondary">No locations recorded.</p>
+                                )}
+                            </CardContent>
+                        </Card>
+                    </div>
+
+                    <div className="lg:col-span-2 flex flex-col gap-3">
+
+                        {/* Basic Information */}
+                        <Card className="rounded-3xl shadow-sm border border-outline/20">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                                    <CatIcon /> Basic Information
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-2 text-secondary">
+                                        <User className="h-5 w-5" />
+                                        <span className="text-sm">Name</span>
+                                    </div>
+                                    <p className="text-lg font-medium">{cat.name}</p>
                                 </div>
-                            )}
-                        </CardContent>
-                    </Card>
+
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-2 text-secondary">
+                                        <VenusAndMars className="h-5 w-5" />
+                                        <span className="text-sm">Gender</span>
+                                    </div>
+                                    <p className="text-lg font-medium capitalize">{cat.gender}</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        {/* Important Dates */}
+                        <Card className="rounded-3xl shadow-sm border border-outline/20">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                                    <Calendar /> Important Dates
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-2 text-secondary">
+                                        <CalendarDays className="h-5 w-5" />
+                                        <span className="text-sm">Birth Date</span>
+                                    </div>
+                                    <p className="text-lg font-medium">{cat.birth_date || '—'}</p>
+                                </div>
+
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-2 text-secondary">
+                                        <CalendarDays className="h-5 w-5" />
+                                        <span className="text-sm">Arrival Date</span>
+                                    </div>
+                                    <p className="text-lg font-medium">{cat.arrival_date || '—'}</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        {/* Neutered */}
+                        <Card className="rounded-3xl shadow-sm border border-outline/20">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                                    <SquareScissors /> Neutered Status
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="flex items-center gap-3">
+                                    {neuteredIcon}
+                                    <div>
+                                        <p className="text-sm text-secondary ">Neutered</p>
+                                        <p className="text-lg font-medium capitalize">{cat.neutered}</p>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        {/* Description */}
+                        <Card className="rounded-3xl shadow-sm border border-outline/20">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                                    <Info /> Description
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                                    {cat.description || 'No description provided.'}
+                                </p>
+                            </CardContent>
+                        </Card>
+
+
+                    </div>
                 </div>
-            </AuthLayout>
+            </div>
         </AppLayout>
     );
 }

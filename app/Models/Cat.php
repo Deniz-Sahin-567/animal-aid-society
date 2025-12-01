@@ -34,7 +34,8 @@ class Cat extends Model
         return $this->belongsToMany(Area::class, 'animal_locations', 'animal_id', 'location');
     }
 
-    public function locations(){
+    public function locations()
+    {
         return DB::table('animal_locations')
             ->join('areas', 'animal_locations.location', '=', 'areas.id')
             ->where('animal_locations.animal_id', $this->id)
@@ -44,5 +45,10 @@ class Cat extends Model
                 'areas.area_id'
             )
             ->get();
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(CatPhoto::class);
     }
 }

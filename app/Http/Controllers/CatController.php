@@ -42,8 +42,10 @@ class CatController extends Controller
      */
     public function show(Cat $cat)
     {
+        $newCat = $cat->load('photos');
+
         return Inertia::render('cats/cat-show', [
-            'cat' => $cat,
+            'cat' => $newCat,
             'locations' => $cat->locations()
         ]);
     }
@@ -53,8 +55,10 @@ class CatController extends Controller
      */
     public function edit(Cat $cat)
     {
+        $newCat = $cat->load('photos');
+
         return Inertia::render('cats/cat-edit', [
-            'cat' => $cat,
+            'cat' => $newCat,
             'locations' => $cat->locations(),
         ]);
     }
