@@ -13,18 +13,18 @@ import {
 import { dashboard } from '@/routes';
 import { SharedData, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { FolderGit2, LayoutGrid, Cat, MapPlus, Map, List, Mail, UserRoundPlus } from 'lucide-react';
+import { FolderGit2, Cat, MapPlus, Map, List, Mail, UserRoundPlus } from 'lucide-react';
 import AppLogo from './app-logo';
 import cats from '@/routes/cats';
 import areas from '@/routes/areas';
 import invitations from '@/routes/invitations';
 
 const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
+    // {
+    //     title: 'Dashboard',
+    //     href: dashboard(),
+    //     icon: LayoutGrid,
+    // },
     {
         title: 'Create Cat',
         href: cats.create(),

@@ -51,7 +51,7 @@ export default function AreaShow({ area, subAreas = [] }: AreaShowProps) {
 
                 <Head title={area.name} />
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 gap-6">
 
                     {/* Area Details */}
                     <Card className="shadow-md rounded-2xl">
@@ -89,7 +89,7 @@ export default function AreaShow({ area, subAreas = [] }: AreaShowProps) {
 
                     {/* Sub-Areas */}
                     {subAreas.length > 0 && (
-                        <Card className="shadow-md rounded-2xl lg:col-span-2">
+                        <Card className="shadow-md rounded-2xl">
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
                                     <LandPlot className="h-6 w-6 text-white-600" />
