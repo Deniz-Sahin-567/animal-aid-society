@@ -10,7 +10,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
 import { SharedData, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { FolderGit2, Cat, MapPlus, Map, List, Mail, UserRoundPlus } from 'lucide-react';
@@ -80,7 +79,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={dashboard()} prefetch>
+                            <Link href={cats.index()} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
